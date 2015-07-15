@@ -1,0 +1,1 @@
+print 'karthi is beauty'
