@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Class Room View -->
+
+<!-- Form view -->
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="room_form_view">
+			<field name="name">view.form</field>
+			<field name="model">student.info.classroom</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Room Details" version="7.0">
+					<sheet>
+						<group>
+							<h1>
+								<field name="name" placeholder="Class Room" nolabel="1"
+									style="width: 100%%;" />
+							</h1>
+							<newline />
+						</group>
+						<group>
+							<notebook>
+								<page string="Students">
+									<field name="student_id" >
+										<form string="Student Lines" version="7.0">
+											<group>
+												<field name="name" />
+												<field name="fname" />
+												<button name="confirm" string="Confirm" class="oe_highlight" icon="gtk-execute"/>
+											</group>
+										</form>
+										<tree string="Student lines" >
+											<field name="name" />
+											<field name="fname" />
+											<button name="print_ok" string="Confirm" class="oe_highlight" icon='gtk-go-forward' type="object"/>
+										</tree>
+									</field>
+								</page>
+							</notebook>
+							<newline />
+						</group>
+						<group>
+							<field name="teachers_id" string="Teachers" style="width: 25%%;"
+								widget="many2many_tags" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<!-- Tree view -->
+		
+		            <record model="ir.ui.view" id="Class_tree_view">
+                <field name="name">student.info.classroom.tree</field>
+                <field name="model">student.info.classroom</field>
+                <field name="type">tree</field>
+                <field name="arch" type="xml">
+                    <tree string="Class Room" >
+                        <field name="name"/>
+                        <field name="student_id" widget="one2many_list"/>
+                        <field name="teachers_id"/>
+                    </tree>
+                </field>
+            </record>
+		
+		<!-- Action Form -->
+
+		<record model="ir.actions.act_window" id="room_form_view_action">
+			<field name="name">Class Room</field>
+			<field name="res_model">student.info.classroom</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- Menu Item -->
+
+		<menuitem id="School_management_sub_menu2" name="Class Room"
+			parent="School_management_menu" />
+		<menuitem id="School_management_sub_menu21" name="Room Details"
+			parent="School_management_sub_menu2" action="room_form_view_action" />
+
+	</data>
+</openerp>
+
+            

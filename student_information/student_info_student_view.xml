@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- School Management System -->
+
+<openerp>
+	<data>
+		<!-- Form view -->
+		<record model="ir.ui.view" id="form_view1">
+			<field name="name">view.form</field>
+			<field name="model">student.info.student</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Student Form" version="7.0">
+					<header>
+						<button name="orm_test" string="TEST" type="object"
+							icon="terp-folder-orange" />
+					</header>
+					<sheet>
+						<group colspan="2" col="2">
+							<separator string="Student Detail" colspan="4" />
+							<field name="s_img" nolabel="1" colspan="4"
+								class="oe_avatar oe_right" widget="image" style="padding: 0px 0px;" />
+							<newline></newline>
+							<label for="name" string="Name" style="width: 25%%" class="oe_edit_only" />
+							<h1>
+								<field name="name" style="width: 25%%" />
+							</h1>
+							<label for="c_class" string="Current Standard" style="width: 5%%"
+								class="oe_edit_only" />
+							<h3>
+								<field name="c_class" style="padding: 0px 0px;" colspan="2"
+									class="oe_inline" />
+								<label string="TH STD" class="oe_inline" style="padding: 0px 0px;" />
+							</h3>
+						</group>
+						<group colspan="4">
+							<notebook>
+								<page string="Personal Details" style="font-weight: bold">
+									<group colspan="4" col="4">
+										<field name="fname" string="Father Name" style="width: 35%%"
+											class="oe_inline" />
+										<field name="mname" string="Mother Name" style="width: 35%%"
+											class="oe_inline" />
+										<field name="age" string="Age" style="width: 35%%"
+											class="oe_inline" />
+										<field name="dob" string="D.O.B" style="width: 35%%"
+											class="oe_inline" on_change='search_stud(dob)' />
+										<field name="a_class" string="Admission Standard" style="width: 35%%"
+											class="oe_inline" />
+										<field name="a_class_date" string="Admission Date"
+											style="width: 35%%" class="oe_inline" />
+										<field name="c_class_date" string="Reopening Date"
+											style="width: 35%%" class="oe_inline" />
+										<field name="room_id" string="Class Room" style="width: 35%%"
+											class="oe_inline" />
+										<field name="unique_test" />
+										<field name="check_test" />
+										<field name="not_null_test" />
+									</group>
+								</page>
+								<page string="Contact Details" style="font-weight: bold">
+									<group>
+										<label for="address" string="Address" />
+										<div>
+											<field name="address" placeholder="Street..." />
+											<field name="street" />
+											<div>
+												<field name="state" class="oe_inline" placeholder="State" />
+												<field name="pincode" class="oe_inline" placeholder="Pincode" />
+											</div>
+											<field name="country" placeholder="Country" />
+
+										</div>
+										<field name="ref" placeholer="Reference" />
+									</group>
+
+									<group>
+
+										<field name="l_line" string="Phone Number" placeholder="Land Line" />
+										<field name="c_no" string="Cell Number" placeholder="Cell Number" />
+										
+
+									</group>
+
+								</page>
+
+							</notebook>
+						</group>
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- tree view -->
+		<record model="ir.ui.view" id="tree_view">
+			<field name="name">view.tree</field>
+			<field name="model">student.info.student</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Student Tree" colors="green:state=='draft';red:state=='trashed'">
+				<field name="state"/>
+					<field name="name" string="Name" />
+					<field name="fname" string="Father Name" />
+					<field name="mname" string="Mother Name" />
+					<field name="c_class" string="Class Studing" />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Searchview -->
+		<record model="ir.ui.view" id="Search_view">
+			<field name="name">view.search</field>
+			<field name="model">student.info.student</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Student Search">
+					<field name="name" string="Name" />
+					<field name="fname" string="Father Name" />
+				</search>
+			</field>
+		</record>
+
+		<!-- kanban view -->
+		<record model="ir.ui.view" id="kanban_view_id">
+			<field name="name">view.kanban</field>
+			<field name="model">student.info.student</field>
+			<field name="arch" type="xml">
+				<kanban quick_create="false" create="true">
+					<field name="name" />
+					<templates>
+
+
+						<t t-name="kanban-box">
+							<div class="oe_module_vignette">
+								<t t-set="installed" />
+								<img t-att-src='_s + "/base/static/src/img/avatar.png"'
+									class="oe_kanban_image" />
+
+
+								<div class="oe_module_desc">
+									<h3>
+										<a type="open">
+											<field name="name" />
+										</a>
+									</h3>
+									<a type="edit">
+										<field name="age" />
+									</a>
+
+								</div>
+
+
+								<!-- <h2><p> <pre>Hello,<field name="name" /></pre> </p></h2> -->
+
+								<p>
+									<t t-esc="value" />
+								</p>
+								<pre>
+									<b>
+										<p>
+											hi,
+											<field name="name" />
+										</p>
+									</b>
+								</pre>
+
+							</div>
+						</t>
+					</templates>
+				</kanban>
+			</field>
+		</record>
+
+		<!-- calendar View -->
+		<record model="ir.ui.view" id="calender_view_id">
+			<field name="name">view.calender</field>
+			<field name="model">student.info.student</field>
+			<field name="arch" type="xml">
+				<calendar string="My Calender" color="name" date_start="dob">
+					<field name="name" />
+					<field name="age" />
+				</calendar>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="gantt_view_id">
+			<field name="name">view.gantt</field>
+			<field name="model">student.info.student</field>
+			<field name="arch" type="xml">
+				<gantt string="Details" date_delay="age" date_start="a_class_date"
+					date_stop="c_class_date">
+					<field name="name" />
+					<field name="age" />
+				</gantt>
+			</field>
+		</record>
+
+		<!-- Graph View -->
+
+		<record model="ir.ui.view" id="graph_view_id">
+			<field name="name">view.graph</field>
+			<field name="model">student.info.student</field>
+			<field name="type">graph</field>
+			<field name="arch" type="xml">
+				<graph string="details">
+					<field name="name" />
+					<field name="age" />
+				</graph>
+			</field>
+		</record>
+
+
+
+		<!-- Menu Action -->
+		<record model="ir.actions.act_window" id="menu_action_student">
+			<field name="name">Student Information</field>
+			<field name="res_model">student.info.student</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form,kanban,calendar,gantt,graph</field>
+		</record>
+
+
+		<!-- Menu Item -->
+
+		<menuitem id="School_management_menu" name="School Management"
+			sequence="1" />
+		<menuitem id="School_management_sub_menu1" name="Student"
+			parent="School_management_menu" />
+		<menuitem id="School_management_sub_menu11" name="Student Details"
+			parent="School_management_sub_menu1" action="menu_action_student" />
+
+
+
+	</data>
+</openerp>

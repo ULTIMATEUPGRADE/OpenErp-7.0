@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- View Inheritance -->
+<openerp>
+	<data>
+
+		<record model="ir.ui.view" id="inherit_form_view1">
+			<field name="name">Inherit_Form</field>
+			<field name="model">student.info.student</field>
+			<field name="inherit_id" ref="form_view1" />
+			<field name="arch" type="xml">
+				<!-- <field name="mname" position="after"> <field name="m_tongue" /> 
+					</field> -->
+					<xpath expr="//notebook//page[@string='Personal Details']//field[@name='mname']" position="after">
+					<field name="m_tongue" style="width: 60%%"/>
+					</xpath>
+			</field>
+		</record>
+
+	</data>
+</openerp>

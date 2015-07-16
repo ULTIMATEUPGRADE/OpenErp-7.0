@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- View Inheritance -->
+<openerp>
+	<data>
+
+		<record model="ir.ui.view" id="inherit_form_view1">
+			<field name="name">Inherit_Form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="account.view_partner_property_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//group[@name='mine']//field[@name='property_payment_term']" position="after">
+					<field name="ptype" />
+				</xpath>
+			</field>
+
+		</record>
+		
+			<record model="ir.ui.view" id="inherit_form_view2">
+			<field name="name">Inherit_Form</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[@string='Other Information']//field[@name='payment_term']" position="after">
+					<field name="ptype" />
+				</xpath>
+			</field>
+
+		</record>
+
+	</data>
+</openerp>
+
+

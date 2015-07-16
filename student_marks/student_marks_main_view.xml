@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Form View -->
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="marks_form_view">
+			<field name="name">Marks Obtained</field>
+			<field name="model">student.mark.main</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Marks" version="7.0">
+					<sheet>
+						<group>
+							<field name="name" />
+							<field name="aavgg" />
+							<field name="smp"/>
+							<field name="num" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- menu action -->
+
+		<record model="ir.actions.act_window" id="marks_form_view_action">
+			<field name="name">Marks Obtained</field>
+			<field name="res_model">student.mark.main</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- menu item -->
+
+		<menuitem id="Mark_menu1" name="Marks Obtained" />
+		<menuitem id="Mark_menu2" name="Marks Obtained" parent="Mark_menu1" />
+		<menuitem id="Mark_menu3" name="Mark Details" parent="Mark_menu2"
+			action="marks_form_view_action" />
+	</data>
+</openerp>
+            
